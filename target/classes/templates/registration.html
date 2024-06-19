@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration</title>
+  <style>
+    body {
+      background-color: #f0f0f0; /* Set background color */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 95vh; /* Center vertically */
+    }
+
+    .registration-box {
+      background-color: #ffffff; /* Set box background color */
+      padding: 20px;
+      border: 1px solid #ccc; /* Add border */
+      border-radius: 5px; /* Add border radius */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+      width: 30em; /* Set width */
+      max-width: 80%; /* Set maximum width */
+      height: auto; /* Set height to auto to fit content */
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    input[type="email"],
+    input[type="text"],
+    input[type="password"],
+    button {
+      padding: 10px; /* Increased padding */
+      margin-bottom: 10px;
+      width: 95%;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      flex-grow: 1; /* Fill remaining space */
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+label{
+  display: flex;
+}
+    button {
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<div class="registration-box">
+  <h1>Sign Up</h1>
+  <form action="/register" method="post" th:object="${userModel}">
+    <div>
+      <label>Email</label>
+      <input type="email" th:field="*{email}" required>
+    </div>
+    <div>
+      <label>First Name</label>
+      <input type="text" th:field="*{firstname}" required>
+    </div>
+    <div>
+      <label>Last Name</label>
+      <input type="text" th:field="*{lastname}" required>
+    </div>
+    <div>
+      <label>Password</label>
+      <input type="password" th:field="*{password}" required>
+    </div>
+    <div>
+      <label>Account Type</label>
+      <input type="radio" name="isAdmin" value="true" required>Admin
+      <input type="radio" name="isAdmin" value="false" required>User
+    </div>
+    <button type="submit">Register</button>
+    <p>Already have an account? <a th:href="@{/login}">Login</a></p>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage users</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #007bff;
+    }
+
+    .alert {
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid transparent;
+      border-radius: .25rem;
+    }
+
+    .alert-success {
+      color: #155724;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+
+    .table {
+      width: 90%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    .table th, .table td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .table th {
+      background-color: #343a40;
+      color: #fff;
+    }
+
+    .table tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .table tbody tr:hover {
+      background-color: #e2e2e2;
+    }
+
+    .action-links a {
+      color: #007bff;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+
+    .action-links a:hover {
+      text-decoration: underline;
+    }
+
+    a{
+      text-decoration: none;
+      color: blue;
+      font-weight: bold;
+
+    }
+    .action{
+      display: flex;
+      justify-content: space-between;
+    }
+
+
+    .add{
+      float: left;
+      margin-left: 80px;
+      margin-top: 35px;
+      color: black;
+      margin-bottom: 15px;
+      border: #343a40;
+      border-radius: 5px;
+      background: #007bff;
+      padding: 10px;
+    }
+    .notify{
+      margin-top: -6px;
+    }
+    .links{
+      display: flex;
+      justify-content: space-between;
+    }
+    .logout{
+      margin-right: 5em;
+    }
+ .add:hover{
+   background-color: cornflowerblue;
+ }
+  </style>
+</head>
+<body>
+<div align="center">
+  <p>Hello  <span th:text="  ${firstname}"></span> <span th:text="${lastname}"></span></p>
+
+  <h1>Welcome to students management  system</h1>
+
+  <p>Revolutionize Your Educational Experience with Our Cutting-Edge Student Management Application</p>
+
+  <div class="links">
+    <a th:href="@{/users/new}" class="add"> add new Student</a>
+    <a th:href="@{/logout}" class=" add logout">Logout</a>
+  </div>
+
+  <div th:if="${message}" class=" alert alert-success notify">
+    [[${message}]]
+  </div>
+
+  <div>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th>Id</th>
+        <th>E-mail</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <th:block th:each="user, iterStat : ${listUsers}">
+        <tr>
+          <td>[[${iterStat.count}]]</td>
+          <td>[[${user.firstname}]]</td>
+          <td>[[${user.lastname}]]</td>
+          <td>[[${user.email}]]</td>
+          <td class="action">
+            <a class="h4" th:href="@{'/users/edit/' + ${user.id}}"> Edit</a>
+            <a class="h4" th:href="@{'/users/delete/'+  ${user.id}}"> Delete</a>
+          </td>
+        </tr>
+
+      </th:block>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
